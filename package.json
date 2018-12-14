@@ -1,13 +1,13 @@
 {
-  "name": "scrape-kommuneskjold",
+  "name": "norwegian-municipality-shields",
   "version": "1.0.0",
-  "description": "",
+  "description": "Norwegian Municipality Shields",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Anders Evenrud <andersevenrud@gmail.com>",
+  "license": "CC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "es6-promise-pool": "^2.5.0",
