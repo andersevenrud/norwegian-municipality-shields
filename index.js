@@ -56,15 +56,6 @@ const parseIndex = html => {
     })
     .get()
     .reduce((carry, item) => ([...carry, item]), [])
-    .filter(item => {
-      if (downloaded.indexOf(item.filename) !== -1) {
-        console.info('Skipping', item.filename)
-
-        return false
-      }
-
-      return true
-    })
 }
 
 const downloadImage = (url, page) =>
@@ -84,9 +75,9 @@ const requestPage = page =>
     .then(uri => {
       return uri
         ? request(uri)
-          .then(parseDownloadLink)
-          .then(url => downloadImage(url, page))
-          .then(success => (page.success = success))
+            .then(parseDownloadLink)
+            .then(url => downloadImage(url, page))
+            .then(success => (page.success = success))
         : Promise.resolve()
     })
 
@@ -107,6 +98,15 @@ const printStats = items => {
 
 request('https://no.wikipedia.org/wiki/Wikipedia:V%C3%A5pengalleri/Kommunev%C3%A5pen')
   .then(parseIndex)
+  .filter(item => {
+    if (downloaded.indexOf(item.filename) !== -1) {
+      console.info('Skipping', item.filename)
+
+      return false
+    }
+
+    return true
+  })
 //  .then(items => items.splice(0, 10))
   .then(items => {
     console.log('Found', items.length)
