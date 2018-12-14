@@ -98,16 +98,17 @@ const printStats = items => {
 
 request('https://no.wikipedia.org/wiki/Wikipedia:V%C3%A5pengalleri/Kommunev%C3%A5pen')
   .then(parseIndex)
-  .filter(item => {
-    if (downloaded.indexOf(item.filename) !== -1) {
-      console.info('Skipping', item.filename)
+  .then(items => {
+    return items.filter(item => {
+      if (downloaded.indexOf(item.filename) !== -1) {
+        console.info('Skipping', item.filename)
 
-      return false
-    }
+        return false
+      }
 
-    return true
+      return true
+    })
   })
-//  .then(items => items.splice(0, 10))
   .then(items => {
     console.log('Found', items.length)
     const pool = new PromisePool(function * () {
